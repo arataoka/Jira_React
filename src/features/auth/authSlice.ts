@@ -13,11 +13,11 @@ import {
 
 export const fetchAsyncLogin = createAsyncThunk('auth/login', async (auth: CRED) => {
     const res = await axios.post<JWT>(
-        `${process.env.REACT_APP_API_URL}/authen/jwt/create/`,
+        `${process.env.REACT_APP_API_URL}/authen/jwt/create`,
         auth,
         {
             headers: {
-                "Content-Type": "appliication/json"
+                "Content-Type": "application/json"
             }
         }
     )
@@ -30,7 +30,7 @@ export const fetchAsyncRegister = createAsyncThunk('auth/register', async (auth:
         auth,
         {
             headers: {
-                "Content-Type": "appliication/json"
+                "Content-Type": "application/json"
             }
         }
     )
@@ -69,12 +69,10 @@ async () =>{
 export const fetchAsyncGetProfs = createAsyncThunk(
     "auth/getProfiles",
     async () =>{
-        const res = await axios.post<PROFILE[]>(
+        const res = await axios.get<PROFILE[]>(
             `${process.env.REACT_APP_API_URL}/api/profile/`,
-            {img:null},
             {
                 headers:{
-                    "Content-Type": "application/json",
                     Authorization:`JWT ${localStorage.localJWT}`,
                 }
             }
@@ -84,7 +82,7 @@ export const fetchAsyncGetProfs = createAsyncThunk(
 )
 
 export const fetchAsyncUpdateProf = createAsyncThunk(
-    "auth/updateProfiles",
+    "auth/updateProfile",
     async(profile:POST_PROFILE)=>{
         const uploadData = new FormData(); //空のフォームデータ
         profile.img && uploadData.append('img',profile.img,profile.img.name);
@@ -160,8 +158,8 @@ export const authSlice = createSlice({
 export const {toggleMode } = authSlice.actions;
 
 export const selectIsLoginView = (state:RootState) => state.auth.isLoginView;
-export const selectIsLoginUser = (state:RootState) => state.auth.loginUser;
-export const selectProgiles = (state:RootState) => state.auth.profiles;
+export const selectLoginUser = (state:RootState) => state.auth.loginUser;
+export const selectProfiles = (state:RootState) => state.auth.profiles;
 
 export const selectCount = (state: RootState) => state.counter.value;
 
