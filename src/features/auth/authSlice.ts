@@ -9,7 +9,7 @@ import {
     PROFILE,
     JWT,
     USER
-} from "../../types";
+} from "../types";
 
 export const fetchAsyncLogin = createAsyncThunk('auth/login', async (auth: CRED) => {
     const res = await axios.post<JWT>(
@@ -161,6 +161,5 @@ export const selectIsLoginView = (state:RootState) => state.auth.isLoginView;
 export const selectLoginUser = (state:RootState) => state.auth.loginUser;
 export const selectProfiles = (state:RootState) => state.auth.profiles;
 
-export const selectCount = (state: RootState) => state.counter.value;
 
 export default authSlice.reducer;

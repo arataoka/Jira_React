@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {RootState} from '../../app/store';
 import axios from "axios";
-import { READ_TASK,POST_TASK, TASK_STATE, USER, CATEGORY } from '../../types';
+import { READ_TASK,POST_TASK, TASK_STATE, USER, CATEGORY } from '../types';
 
 export const fetchAsyncGetTasks = createAsyncThunk('task/getTask', async()=>{
     const res = await axios.get<READ_TASK[]>(
